@@ -7,6 +7,7 @@
 
 import XCTest
 @testable import ToDoApp_Unit_tests_
+import CoreLocation
 
 final class TaskTests: XCTestCase {
 
@@ -37,6 +38,14 @@ final class TaskTests: XCTestCase {
     func testTaskInitsWithDate() {
         let task = Task(title: "Foo")
         XCTAssertNotNil(task.date)
+    }
+    
+    func testWhenGivenLocationSetsLocation() {
+        let location = Location(name: "Foo")
+        let task = Task(title: "Foo", description: "Bar", location: location)
+        
+        XCTAssertEqual(task.location, location)
+        
     }
     
 }
