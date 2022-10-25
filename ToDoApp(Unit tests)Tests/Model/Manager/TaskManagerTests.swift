@@ -45,5 +45,37 @@ final class TaskManagerTests: XCTestCase {
         
         XCTAssertEqual(task.title, returnedTask.title)
     }
+    
+    func testCheckTasktIndexChangesCounts() {
+        let task = Task(title: "Foo")
+        sut.add(task)
+        
+        sut.checkTask(at: 0)
+        
+        XCTAssertEqual(sut.tasksCount, 0)
+        XCTAssertEqual(sut.doneTasksCount, 1)
+        
+    }
+    
+    func testTaskCheckedRemoveFromTasks() {
+        let firstTask = Task(title: "Foo")
+        let secondTask = Task(title: "Bar")
+        sut.add(firstTask)
+        sut.add(secondTask)
+    
+        sut.checkTask(at: 0)
+        
+        XCTAssertEqual(sut.task(at: 0).title, "Bar")
+    }
+    
+    func testDoneTaskAddReturnesCheckedTask() {
+        let task = Task(title: "Foo")
+        sut.add(task)
+        
+        sut.checkTask(at: 0)
+        let returnedTask = sut.doneTask(at: 0)
+        
+        XCTAssertEqual(returnedTask.title, task.title)
+    }
 
 }
