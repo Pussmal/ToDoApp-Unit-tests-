@@ -20,3 +20,13 @@ struct Task {
         self.location = location
     }
 }
+
+extension Task: Equatable {
+    static func == ( lhs: Task, rhs: Task) -> Bool {
+        guard
+            lhs.title == rhs.title,
+            lhs.description == rhs.description,
+            lhs.location == rhs.location else { return false }
+        return true
+    }
+}
